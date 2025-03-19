@@ -84,7 +84,7 @@
         </param>
     </inputs>
     <outputs>
-        <data name="output_sqlite" format="sqlite" label="${tool_name}: SQLite database"/>
+        <data name="output_sqlite" format="sqlite" label="${tool.name}: SQLite database"/>
         <data name="output_summary_single_row" format="tsv" label="${tool.name}: Summary table (Single row and separate columns)"/>
         <data name="output_summary_multiple_row" format="tsv" label="${tool.name}: Summary table (multiple rows and separate columns)"/>
 
