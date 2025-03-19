@@ -74,13 +74,10 @@
         </param>
         <param name="save_db" type="boolean" checked="false" label="Save Results to SQL Database" truevalue="true" falsevalue="false" />
         <param name="save_mr" type="boolean" checked="false" label="Save Multiple Row Results" truevalue="true" falsevalue="false" />
-        <param name="output_db" type="data" format="sqlite" label="SQLite Database Output" />
-        <param name="output_sr" type="data" format="tsv" label="Single Row Output" />
         <param name="sr_sep" type="select" label="Single Row Separator">
             <option value="tab" selected="True">Tab</option>
             <option value="comma">Comma</option>
         </param>
-        <param name="output_mr" type="data" format="tsv" label="Multiple Row Output" />
         <param name="mr_sep" type="select" label="Multiple Row Separator">
             <option value="tab" selected="True">Tab</option>
             <option value="comma">Comma</option>
