@@ -35,10 +35,10 @@
             #if $save_mr == "true"
                 --save-mr \
             #end if
-            --db-out "$output_db" \
-            --sr-out "$output_sr" \
+            --db-out "$output_sqlite" \
+            --sr-out "$output_summary_single_row" \
             --sr-sep "$sr_sep" \
-            --mr-out "$output_mr" \
+            --mr-out "$output_summary_multiple_row" \
             --mr-sep "$mr_sep"
     ]]></command>
     <inputs>
