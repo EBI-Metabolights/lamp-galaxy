@@ -1,0 +1,115 @@
+<tool id="lamp" name="LAMP" version="1.0.0+galaxy0">
+    <description>Compounds Annotation of LC-MS data</description>
+    <requirements>
+        <requirement type="package" version="1.0.0">lamps</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        echo "Executing LAMP"
+        python -m lamp cli \
+            --input-data "$input_data" \
+            --col-idx "$col_idx" \
+            --input-sep "$input_sep" \
+            --thres-rt "$thres_rt" \
+            --thres-corr "$thres_corr" \
+            --thres-pval "$thres_pval" \
+            --method "$method" \
+            #if $positive == "true"
+                --positive \
+            #end if
+            --ppm "$ppm" \
+            --ion-mode "$ion_mode" \
+            #if $ref_path
+                --ref-path "$ref_path" \
+            #end if
+            --ref-sep "$ref_sep" \
+            #if $cal_mass == "true"
+                --cal-mass \
+            #end if
+            #if $add_path
+                --add-path "$add_path" \
+            #end if
+            --add-sep "$add_sep" \
+            #if $save_db == "true"
+                --save-db \
+            #end if
+            #if $save_mr == "true"
+                --save-mr \
+            #end if
+            --db-out "$output_db" \
+            --sr-out "$output_sr" \
+            --sr-sep "$sr_sep" \
+            --mr-out "$output_mr" \
+            --mr-sep "$mr_sep"
+    ]]></command>
+    <inputs>
+        <param name="input_data" type="data" format="tsv,tabular" label="Input Data File" />
+        <param name="col_idx" type="text" value="1,2,3,4" label="Column Index (name, mz, rt, intensity start)" />
+        <param name="input_sep" type="select" label="Input Separator">
+            <option value="tab" selected="True">Tab</option>
+            <option value="comma">Comma</option>
+        </param>
+        <param name="thres_rt" type="float" value="1.0" label="Threshold for Retention Time Difference" />
+        <param name="thres_corr" type="float" value="0.5" label="Threshold for Correlation Coefficient" />
+        <param name="thres_pval" type="float" value="0.05" label="Threshold for P-Values" />
+        <param name="method" type="select" label="Correlation Method">
+            <option value="pearson" selected="True">Pearson</option>
+            <option value="spearman">Spearman</option>
+        </param>
+        <param name="positive" type="boolean" checked="false" label="Use Only Positive Correlation" truevalue="true" falsevalue="false" />
+        <param name="ppm" type="float" value="5.0" label="Mass Tolerance (ppm)" />
+        <param name="ion_mode" type="select" label="Ion Mode">
+            <option value="pos" selected="True">Positive</option>
+            <option value="neg">Negative</option>
+        </param>
+        <param name="ref_path" type="data" format="tsv,tabular" optional="true" label="Reference File for Compound Matching" />
+        <param name="ref_sep" type="select" label="Reference Separator">
+            <option value="tab" selected="True">Tab</option>
+            <option value="comma">Comma</option>
+        </param>
+        <param name="cal_mass" type="boolean" checked="false" label="Calculate Mass Based on NIST" truevalue="true" falsevalue="false" />
+        <param name="add_path" type="data" format="tsv,tabular" optional="true" label="Adducts Library for Mass Adjustment" />
+        <param name="add_sep" type="select" label="Adducts Separator">
+            <option value="tab" selected="True">Tab</option>
+            <option value="comma">Comma</option>
+        </param>
+        <param name="save_db" type="boolean" checked="false" label="Save Results to SQL Database" truevalue="true" falsevalue="false" />
+        <param name="save_mr" type="boolean" checked="false" label="Save Multiple Row Results" truevalue="true" falsevalue="false" />
+        <param name="output_db" type="data" format="sqlite" label="SQLite Database Output" />
+        <param name="output_sr" type="data" format="tsv" label="Single Row Output" />
+        <param name="sr_sep" type="select" label="Single Row Separator">
+            <option value="tab" selected="True">Tab</option>
+            <option value="comma">Comma</option>
+        </param>
+        <param name="output_mr" type="data" format="tsv" label="Multiple Row Output" />
+        <param name="mr_sep" type="select" label="Multiple Row Separator">
+            <option value="tab" selected="True">Tab</option>
+            <option value="comma">Comma</option>
+        </param>
+    </inputs>
+    <outputs>
+        <data name="output_sqlite" format="sqlite" label="${tool_name}: SQLite database"/>
+        <data name="output_summary_single_row" format="tsv" label="${tool.name}: Summary table (Single row and separate columns)"/>
+        <data name="output_summary_multiple_row" format="tsv" label="${tool.name}: Summary table (multiple rows and separate columns)"/>
+
+    </outputs>
+    <help>
+        Galaxy tool wrapper for LAMP
+        ==============================
+        
+        This tool annotates compounds in LC-MS data using LAMP.
+
+        The Liverpool Annotation of metabolites using Mass sPectrometry (LAMP) is a Python package and an easy-to-use software for feature grouping 
+        and metabolite annotation using MS1 data only. LAMP groups features based on chromatographic retention time similarity and positive 
+        response-based correlations across multiple biological samples. Genome-scale metabolic models are the source of metabolites applied 
+        in the standard reference files though any source of metabolites can be used (e.g. HMDB or LIPIDMAPS). The m/z differences related to 
+        in-source fragments, adducts, isotopes, oligomers and charge states can be user-defined in the reference file.
+        
+        Parameters:
+        - Input data file (peak list)
+        - Correlation analysis options
+        - Reference and adduct libraries
+        - Results output formats
+        
+        See the LAMP documentation for more details.
+    </help>
+</tool>
