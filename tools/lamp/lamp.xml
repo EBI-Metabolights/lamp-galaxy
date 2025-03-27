@@ -27,10 +27,10 @@
             #if $add_path
                 --add-path "$add_path" 
             #end if
-            --add-sep "$add_sep" 
-            --save-db 
+            --add-sep "$add_sep"
+            --db-out "$output_sqlite"
             #if $save_db == "true"
-                --db-out "$output_sqlite"
+                --save-db 
             #end if
             --sr-out "$output_summary_single_row" 
             --sr-sep "$sr_sep" 
