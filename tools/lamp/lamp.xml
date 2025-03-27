@@ -39,7 +39,7 @@
             #end if
             --sr-out "$output_summary_single_row" 
             --sr-sep "$sr_sep" 
-            #if $save_mr
+            #if $mr_condi.save_mr
                 --mr-out "$output_summary_multiple_row" 
                 --mr-sep "$mr_sep"
             #end if
