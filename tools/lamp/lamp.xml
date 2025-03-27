@@ -1,4 +1,4 @@
-<tool id="lamp" name="LAMP" version="1.0.0+galaxy0">
+<tool id="lamp" name="LAMP" version="1.0.3+galaxy16">
     <description>Compounds Annotation of LC-MS data</description>
     <requirements>
         <requirement type="package" version="1.0.3">lamps</requirement>
@@ -96,7 +96,7 @@
         </data>
         <data name="output_summary_single_row" format="tsv" label="${tool.name}: Summary table (Single row and separate columns)"/>
         <data name="output_summary_multiple_row" format="tsv" label="${tool.name}: Summary table (multiple rows and separate columns)">
-            <filter>save_mr is True</filter>
+            <filter>mr_condi["save_mr"] is True</filter>
         </data>
 
     </outputs>
