@@ -28,12 +28,14 @@
                 --add-path "$add_path" 
             #end if
             --add-sep "$add_sep" 
+            --save-db 
             #if $save_db == "true"
-                --save-db 
                 --db-out "$output_sqlite"
             #end if
             --sr-out "$output_summary_single_row" 
             --sr-sep "$sr_sep" 
+            --mr-out "$output_summary_multiple_row" 
+
             #if $mr_condi.save_mr == "true"
                 --mr-out "$output_summary_multiple_row" 
                 --mr-sep "$mr_sep"
