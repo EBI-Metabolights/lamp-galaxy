@@ -30,8 +30,6 @@
             --add-sep "$add_sep" 
             #if $save_db == "true"
                 --save-db 
-            #end if
-            #if $db_out
                 --db-out "$output_sqlite"
             #end if
             --sr-out "$output_summary_single_row" 
