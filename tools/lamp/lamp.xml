@@ -31,15 +31,12 @@
             #if $save_db == "true"
                 --save-db 
             #end if
-            #if $save_mr == "true"
-                --save-mr 
-            #end if
             #if $db_out
                 --db-out "$output_sqlite"
             #end if
             --sr-out "$output_summary_single_row" 
             --sr-sep "$sr_sep" 
-            #if $mr_condi.save_mr
+            #if $mr_condi.save_mr == "true"
                 --mr-out "$output_summary_multiple_row" 
                 --mr-sep "$mr_sep"
             #end if
